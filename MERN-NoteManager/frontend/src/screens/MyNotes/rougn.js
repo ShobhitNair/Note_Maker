@@ -1,24 +1,34 @@
-<Accordion defaultActiveKey="0">
-      <Accordion.Item eventKey="0">
-        <Accordion.Header>Accordion Item #1</Accordion.Header>
-        <Accordion.Body>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-          eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-          minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-          aliquip ex ea commodo consequat. Duis aute irure dolor in
-          reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-          pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-          culpa qui officia deserunt mollit anim id est laborum.
-        </Accordion.Body>
-      </Accordion.Item>
-      <Accordion/>
+import React from "react";
+import { Accordion, Card, Badge, Button } from "react-bootstrap";
 
+const MyNotes = ({ notes, deleteHandler, ModelShow }) => {
+  return (
+    <>
+      {/* Accordion with default layout */}
+      <Accordion defaultActiveKey="0">
+        {notes.map((note) => (
+          <Accordion.Item key={note._id} eventKey={note._id}>
+            <Accordion.Header>{note.title}</Accordion.Header>
+            <Accordion.Body>
+              <Badge bg="success">Category - {note.category}</Badge>
+              <blockquote className="blockquote mb-0">
+                <p className="fs-6 mt-2">{note.content}</p>
+                <footer style={{ fontSize: 14, opacity: 0.5 }}>
+                  Created on - {note.createdAt.substring(0, 10)}
+                </footer>
+              </blockquote>
+            </Accordion.Body>
+          </Accordion.Item>
+        ))}
+      </Accordion>
 
-      <Accordion>
-          <Card style={{ margin: 10 }} key={note._id}>
+      {/* Accordion with card-based layout */}
+      {notes.map((note) => (
+        <Accordion key={note._id}>
+          <Card style={{ margin: 10 }}>
             <Card.Header style={{ display: "flex" }}>
               <span
-                // onClick={() => ModelShow(note)}
+                onClick={() => ModelShow(note)}
                 style={{
                   color: "black",
                   textDecoration: "none",
@@ -28,11 +38,10 @@
                   fontSize: 18,
                 }}
               >
-                <Accordion.Toggle as="sdsda" variant="link" eventKey="0">
+                <Accordion.Toggle as={Card.Text} variant="link" eventKey="0">
                   {note.title}
                 </Accordion.Toggle>
               </span>
-
               <div>
                 <Button href={`/note/${note._id}`}>Edit</Button>
                 <Button
@@ -44,26 +53,27 @@
                 </Button>
               </div>
             </Card.Header>
-            {/* <Accordion.Collapse eventKey="0"> */}
-            <Card.Body>
-              <Badge bg="success">Category - {note.category}</Badge>
-              <blockquote className="blockquote mb-0">
-                <p className="fs-6 mt-2">{note.content}</p>
-                <footer style={{ fontSize: 14, opacity: 0.5 }}>
-                  Created on - date
-                </footer>
-              </blockquote>
-            </Card.Body>
-
-            {/* </Accordion.Collapse> */}
+            <Accordion.Collapse eventKey="0">
+              <Card.Body>
+                <Badge bg="success">Category - {note.category}</Badge>
+                <blockquote className="blockquote mb-0">
+                  <p className="fs-6 mt-2">{note.content}</p>
+                  <footer style={{ fontSize: 14, opacity: 0.5 }}>
+                    Created on - {note.createdAt.substring(0, 10)}
+                  </footer>
+                </blockquote>
+              </Card.Body>
+            </Accordion.Collapse>
           </Card>
-        </Accordion> 
+        </Accordion>
+      ))}
 
-
-        <Accordion defaultActiveKey="0">
-          <Accordion.Item eventKey="0">
+      {/* Accordion with flex layout */}
+      <Accordion defaultActiveKey="0">
+        {notes.map((note) => (
+          <Accordion.Item key={note._id} eventKey={note._id}>
             <Accordion.Header>
-              <div className="d-flex justif-content-center">
+              <div className="d-flex justify-content-center">
                 <div className="me-5">
                   <span>{note.title}</span>
                 </div>
@@ -84,9 +94,15 @@
               <blockquote className="blockquote mb-0">
                 <p className="fs-6 mt-2">{note.content}</p>
                 <footer style={{ fontSize: 14, opacity: 0.5 }}>
-                  Created on - date
+                  Created on - {note.createdAt.substring(0, 10)}
                 </footer>
               </blockquote>
             </Accordion.Body>
           </Accordion.Item>
-        </Accordion>
+        ))}
+      </Accordion>
+    </>
+  );
+};
+
+export default MyNotes;

@@ -33,8 +33,8 @@ const App = () => {
           <Route path="login" element={<LoginScreen />} />
           <Route path="register" element={<RegisterScreen />} />
           <Route path="mynotes" element={<MyNotes search={search} />} />
-          <Route path="createnote" element={<CreateNote />} />
-          <Route path="note/:id" element={<UpdateNote />} />
+         <Route path="createnote" element={<CreateNote />} />
+          <Route path="note/:id" element={<UpdateNote />} /> 
           <Route path="profile" element={<ProfileScreen />} />
           <Route
             path="admin"

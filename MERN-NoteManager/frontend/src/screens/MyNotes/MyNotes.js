@@ -19,7 +19,7 @@ const MyNotes = ({ search }) => {
   const {
     userInfo: { name },
   } = userLogin;
-  // const [notes, setNotes] = useState([]);
+  const [note, setNotes] = useState([]);
 
   const noteCreate = useSelector((state) => state.noteCreate);
   const { success: successCreate } = noteCreate;
@@ -53,25 +53,25 @@ const MyNotes = ({ search }) => {
       ],
     });
 
-    // if (window.confirm("Are you sure?")) {
-    //   dispatch(deleteNoteAction(id));
-    // }
-    // navigate("/mynotes");
+    if (window.confirm("Are you sure?")) {
+      dispatch(deleteNoteAction(id));
+    }
+    navigate("/mynotes");
   };
 
-  // const fetchNotes = async () => {
-  //   const { data } = await axios.get("/api/notes");
-  //   setNotes(data);
-  // };
+  const fetchNotes = async () => {
+    const { data } = await axios.get("/api/notes");
+    setNotes(data);
+  };
 
   useEffect(() => {
     dispatch(listNotes());
 
-    // fetchNotes();
+    fetchNotes();
   }, [dispatch, successCreate, successUpdate, successDelete]);
   return (
     <MainScreen title={`Welcome Back ${name}..`}>
-      <Link to="/createnote">
+       <Link to="/createnote">
         <Button style={{ marginLeft: 10, marginBottom: 6 }} size="lg">
           Create new Note
         </Button>
@@ -116,8 +116,8 @@ const MyNotes = ({ search }) => {
                 </Accordion.Body>
               </Accordion.Item>
             </Accordion>
-          </>
-        ))}
+          </> 
+         ))} 
     </MainScreen>
   );
 };

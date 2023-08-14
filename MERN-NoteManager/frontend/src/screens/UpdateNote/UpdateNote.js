@@ -23,7 +23,7 @@ function UpdateNote() {
   const navigate = useNavigate();
 
   const noteUpdate = useSelector((state) => state.noteUpdate);
-  const { loading, error } = noteUpdate;
+  const { loading,note,error } = noteUpdate;
 
   const noteDelete = useSelector((state) => state.noteDelete);
   const {
@@ -50,14 +50,14 @@ function UpdateNote() {
         },
       ],
     });
-
-    // if (window.confirm("Are you sure?")) {
-    //   dispatch(deleteNoteAction(id));
-    // }
-    // navigate("/mynotes");
+if (window.confirm("Are you sure?")) {
+      dispatch(deleteNoteAction(id));
+    }
+    navigate("/mynotes");
+    
   };
 
-  //   console.log(note);
+    console.log(note);
 
   const resetHandler = () => {
     setTitle("");

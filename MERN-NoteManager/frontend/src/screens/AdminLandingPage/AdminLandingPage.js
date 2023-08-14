@@ -111,7 +111,7 @@ const AdminLandingPage = ({ userSearch, setAdmin }) => {
       {!loading && !error && (
         <Table responsive striped bordered hover className="text-center">
           <thead>
-            <tr>
+            <tr style={{color:"black"}}>
               <th>SiNo</th>
               <th>Profile Pic</th>
               <th>Name</th>
@@ -125,18 +125,18 @@ const AdminLandingPage = ({ userSearch, setAdmin }) => {
               user.name.toLowerCase().includes(userSearch.toLowerCase())
             )
             .map((user, index) => (
-              <tbody key={index}>
+              <tbody key={index} >
                 <tr>
-                  <td>{index + 1}</td>
-                  <td style={{ width: "160px" }}>
+                  <td style={{color:"black"}}>{index + 1}</td>
+                  <td style={{   width: "160px" }}>
                     <img
                       style={{ width: "80px", height: "auto" }}
                       src={user.pic}
                       alt={user.name}
                     ></img>
                   </td>
-                  <td>{user.name}</td>
-                  <td>{user.email}</td>
+                  <td style={{color:"black"}}>{user.name}</td>
+                  <td style={{color:"black"}}>{user.email}</td>
                   <td>
                     <Link to={`/admin/user/${user._id}`}>
                       <Button>
